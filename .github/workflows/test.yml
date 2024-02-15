@@ -25,6 +25,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Prepare Django Project
+      run: |
+        django-admin startproject app
+        cp tests/settings.py app/settings.py
     - name: Run Tests
       run: |
+        cd app
         python manage.py test
