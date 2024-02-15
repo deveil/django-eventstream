@@ -4,7 +4,10 @@ import asyncio
 import six
 from django.http import HttpResponseBadRequest
 from channels.generic.http import AsyncHttpConsumer
-from channels.http import AsgiRequest
+try:
+    from channels.http import AsgiRequest
+except ModuleNotFoundError:
+    from django.core.handlers.asgi import ASGIRequest as AsgiRequest
 from channels.db import database_sync_to_async
 from .utils import add_default_headers, sse_encode_error
 
